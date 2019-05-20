@@ -19,7 +19,7 @@ NUM_OF_ROUNDS = 16
 
 
 # PKCS#7 - N bytes, each of value N are added.
-def pkcsf7(text):
+def pkcs7(text):
     if len(text) % BLOCK_SIZE_BYTE == 0:
         return text
     add_text = BLOCK_SIZE_BYTE - len(text) % BLOCK_SIZE_BYTE
@@ -119,8 +119,8 @@ def round_keys(key56):
 
 
 # Split 48 bits into 6 bits each
-def split_in_6bits(XOR_48bits):
-    list_of_6bits = textwrap.wrap(XOR_48bits, 6)
+def split_in_6bits(bits48):
+    list_of_6bits = textwrap.wrap(bits48, 6)
     return list_of_6bits
 
 
@@ -179,8 +179,8 @@ def split(word):
 
 
 # Function for encryption|decryption
-# whattodo - E: encrypt, D: decrypt
-def decrypt_encrypt(whattodo, text, keys):
+# action - E: encrypt, D: decrypt
+def decrypt_encrypt(action, text, keys):
     text = text_by_blocks(text)
     transp_block_of_msg = []
     for b in text:
@@ -189,9 +189,9 @@ def decrypt_encrypt(whattodo, text, keys):
     for p_plaintext in transp_block_of_msg:
         L, R = split_msg_in_half(p_plaintext)
         for round in range(NUM_OF_ROUNDS):
-            if whattodo == 'E':
+            if action == 'E':
                 newR = XOR_to_use.getval(split(L), split(functionF(R, keys[round])))
-            else:
+            elif action == 'D':
                 newR = XOR_to_use.getval(split(L), split(functionF(R, keys[15 - round])))
             newL = R
             R = newR
@@ -307,7 +307,7 @@ INVERSE_PERMUTATION_TABLE = ['40 ', '8 ', '48 ', '16 ', '56 ', '24 ', '64 ', '32
 opened_text = input('Enter the plain text: ')
 print("\nPlain text text is:", opened_text)
 
-padded_msg = pkcsf7(opened_text)
+padded_msg = pkcs7(opened_text)
 print('Plain text after PKCS#7:', padded_msg)
 
 padded_bin = to_bin_str(padded_msg)
