@@ -14,13 +14,14 @@ Enter the plain text: Example for GitHub.
 
 Plain text text is: Example for GitHub.
 Plain text after PKCS#7: Example for GitHub.
-Key is:  tpeakizy
+Key is:  libegcdx
 
 Encryption: 
-Encrypted message is:  1ìS±ao©XW`(ÉÌ#Oý*
+Encrypted message is:  µ\-5#Kô²æ^ö3È6ù¯­Æãs
 
 Decryption: 
 Plain text is:  Example for GitHub.
 
-Program execution time is:  15.474822521209717
+Encryption time is:  1.4132802486419678
 ```
+
