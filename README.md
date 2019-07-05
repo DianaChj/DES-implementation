@@ -25,3 +25,7 @@ Plain text is:  Example for GitHub.
 Encryption time is:  1.4132802486419678
 ```
 
+![Figure_1](https://user-images.githubusercontent.com/50831927/60730919-e208be00-9f4e-11e9-964e-bdc7c329b394.png)
+```text       
+      An illustration of ANN learning on 1000 epoch. ANN was used as XOR operation.
+```
