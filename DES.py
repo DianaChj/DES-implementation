@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 # Author:   Diana Chajkovska
 # Date:     20th May, 2019
 
@@ -8,7 +10,6 @@ import time
 
 import XOR_to_use
 
-start = time.time()
 
 BLOCK_SIZE_BYTE = 8
 BLOCK_SIZE = 64
@@ -63,6 +64,7 @@ def to_bin_str(text):
     bin_str = ''
     for i in text:
         ascii_sym = ord(i)
+        # print(ascii_sym)
         bin_str += (bin(ascii_sym)[2:]).zfill(8)
     return bin_str
 
@@ -307,10 +309,13 @@ INVERSE_PERMUTATION_TABLE = ['40 ', '8 ', '48 ', '16 ', '56 ', '24 ', '64 ', '32
 opened_text = input('Enter the plain text: ')
 print("\nPlain text text is:", opened_text)
 
+start = time.time()
+
 padded_msg = pkcs7(opened_text)
 print('Plain text after PKCS#7:', padded_msg)
 
 padded_bin = to_bin_str(padded_msg)
+
 
 key = random_string()
 print("Key is: ", key)
@@ -319,6 +324,7 @@ bin_key_64 = to_bin_str(key)
 key_56bits = transpose(bin_key_64, PC1)
 left_side, right_side = split_key_in_half(key_56bits)
 roundkeys = round_keys(key_56bits)
+
 
 print('\nEncryption: ')
 encrypt = decrypt_encrypt('E', padded_bin, roundkeys)
@@ -331,4 +337,5 @@ print('Plain text is: ', unpad(bit_array_to_string(decrypt)))
 XOR_to_use.ses_close()
 
 end = time.time()
-print('\nProgram execution time is: ', end-start)
+print('\nEncryption time is: ', end-start)
+exit(0)
